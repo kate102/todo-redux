@@ -11,26 +11,7 @@ const { Component } = React;
 
 // The link component now only 
 // specifies how the linke loks wheethere it is active ot inactive
-const Link = ({
-  active,
-  children,
-  onClick
-}) => {
-  if (active) {
-    return <span>{children}</span>;
-  }
 
-  return (
-    <a href='#'
-    onClick={e => {
-      e.proventDefault();
-      onClick(filter);
-    }}
-    >
-      {children}
-    </a>
-  );
-};
 
 const todo = (state, action) => {
 
@@ -66,6 +47,37 @@ const visibilityFilter = (
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+const Link = ({
+  active,
+  children,
+  onClick
+}) => {
+  if (active) {
+    return <span>{children}</span>;
+  }
+
+  return (
+    <a href='#'
+    onClick={e => {
+      e.proventDefault();
+      onClick(filter);
+    }}
+    >
+      {children}
+    </a>
+  );
+};
+
 const mapStateToLinkProps = (
   state,
   ownProps
@@ -74,9 +86,8 @@ const mapStateToLinkProps = (
     active:
     ownProps.filter ===
     state.visibilityFilter
-  }
-}
-
+  };
+};
 
 const mapDispatchToLinkProps = (
   dispatch,
@@ -97,30 +108,23 @@ const FilterLink = connect(
   mapDispatchToLinkProps
 )(Link);
 
-
 const Footer = () => (
   <p>
     Show:
     {' '}
-    <FilterLink
-      filter='SHOW_ALL'
-    >
+    <FilterLink filter='SHOW_ALL'>
     All 
     </FilterLink>
     {', '}
-    <FilterLink
-      filter='SHOW_ACTIVE'
-    >
+    <FilterLink filter='SHOW_ACTIVE'>
     Active
     </FilterLink>
     {', '}
-    <FilterLink
-      filter='SHOW_COMPLETED'
-    >
+    <FilterLink filter='SHOW_COMPLETED'>
     Completed
     </FilterLink>
   </p>
-)
+);
 // Presentational Component
 const Todo = ({
   onClick, 
@@ -137,8 +141,6 @@ const Todo = ({
     {text}
   </li>
 );
-
-
 // Presentational Component
 const TodoList = ({
   todos,
@@ -178,7 +180,7 @@ let AddTodo = ({ dispatch }) => {
     </div>
   );
 };
-AddTodo = connect() (AddTodo);
+AddTodo = connect()(AddTodo);
 
 const getVisibleTodos = (
   todos,
